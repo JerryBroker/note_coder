@@ -1,1 +1,44 @@
 
+#include "header.h"
+
+int main(){
+	long a1 = 64;
+	long a2 = 32;
+	long x;
+	x = divideConquer(a1,a2,2);
+	printf("%d\n",x);
+	system("pause");
+	return 0;
+}
+
+
+long divideConquer(long X, long Y, int n){
+	int t = n/2;
+	long result;
+	long pow = 1;
+	long x;
+	long y;
+	int sign = SIGN(X)*SIGN(Y);
+	long A,B,C,D,AC,BD,A_BD_C;
+	int i;
+	for(i = 0;i<t;i++){
+		pow = pow*10;
+	}
+	if(X == 0 && Y == 0)
+		return 0;
+	else if(n ==1)
+		return sign*X*Y;
+	else{
+	A = x/pow;
+	B = x-A;
+	C = y/pow;
+	D = y-C;
+	AC = divideConquer(A,C,t);
+	BD = divideConquer(B,D,t);
+	A_BD_C = divideConquer((A-B),(D-C),t);
+	result = AC*pow + (A_BD_C + AC + BD)*pow + BD;
+
+	}
+
+	return result*sign;
+}
